@@ -13,11 +13,8 @@ pub fn factorial(num: u64) -> u64 {
 
     let mut fact = 1;
     let mut iter = 1..=num;
-    loop {
-        match iter.next() {
-            Some(i) => fact *= i,
-            None => break,
-        }
+    while let Some(i) = iter.next() {
+        fact *= i
     }
 
     fact
