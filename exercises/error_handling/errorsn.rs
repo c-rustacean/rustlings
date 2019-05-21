@@ -22,11 +22,14 @@ use std::io;
 // PositiveNonzeroInteger is a struct defined below the tests.
 fn read_and_validate(b: &mut io::BufRead) -> Result<PositiveNonzeroInteger, Box<error::Error>> {
     let mut line = String::new();
-    b.read_line(&mut line).expect("read line failed");
+    b.read_line(&mut line)?;
 
-    let num: i64 = line.trim().parse()?;
-    let answer = PositiveNonzeroInteger::new(num)?;
-    Ok(answer)
+    if let Ok(num) = line.trim().parse::<i64>() {
+        let answer = PositiveNonzeroInteger::new(num)?;
+        Ok(dbg!(answer))
+    } else {
+        Err("Parse error".into())
+    }
 
     // match line.trim().parse() {
     //     Ok(num) => {
