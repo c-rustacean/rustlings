@@ -24,21 +24,13 @@ fn read_and_validate(b: &mut io::BufRead) -> Result<PositiveNonzeroInteger, Box<
     let mut line = String::new();
     b.read_line(&mut line)?;
 
-    if let Ok(num) = line.trim().parse::<i64>() {
-        let answer = PositiveNonzeroInteger::new(num)?;
-        Ok(dbg!(answer))
-    } else {
-        Err("Parse error".into())
+    match line.trim().parse::<i64>() {
+        Ok(num) => {
+            let answer = PositiveNonzeroInteger::new(num)?;
+            Ok(answer)
+        },
+        Err(e) => Err(e.into()),
     }
-
-    // match line.trim().parse() {
-    //     Ok(num) => {
-    //         let answer = PositiveNonzeroInteger::new(num)?;
-    //         Ok(answer)
-    //     },
-    //     // Err(e) => error::Error::from(Err(e)),
-    //     Err(e) => Box::new(Err(e)),
-    // }
 
 }
 
