@@ -10,6 +10,17 @@ pub fn factorial(num: u64) -> u64 {
     // For the most fun don't use:
     // - recursion
     // Scroll down for hints.
+
+    let mut fact = 1;
+    let mut iter = 1..=num;
+    loop {
+        match iter.next() {
+            Some(i) => fact *= i,
+            None => break,
+        }
+    }
+
+    fact
 }
 
 #[cfg(test)]
